@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="566593ab6b1242a4b55dc19f1ec12e8e" Name="Diagram1">
+        <EntityTypeShape EntityType="ComputerSoftModel.Client" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.ComputerEquipment" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.EquipmentType" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.OrderContent" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.OrderInfo" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.OrderStatus" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.RepairType" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.Staff" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.StaffRole" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ComputerSoftModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ComputerSoftModel.FK__OrderInfo__Clien__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerSoftModel.FK__ComputerE__Equip__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerSoftModel.FK__OrderCont__Equip__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerSoftModel.FK__OrderCont__Order__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerSoftModel.FK__OrderCont__Repai__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerSoftModel.FK__OrderInfo__Order__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ComputerSoftModel.FK__Staff__StaffPosi__5EBF139D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
