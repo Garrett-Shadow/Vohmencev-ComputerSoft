@@ -13,10 +13,10 @@ namespace Vohmencev_ComputerSoft.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ComputerSoftEntities : DbContext
+    public partial class Vohmencev_ComputerSoftEntities : DbContext
     {
-        public ComputerSoftEntities()
-            : base("name=ComputerSoftEntities")
+        public Vohmencev_ComputerSoftEntities()
+            : base("name=Vohmencev_ComputerSoftEntities")
         {
         }
     
@@ -28,7 +28,6 @@ namespace Vohmencev_ComputerSoft.Database
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<ComputerEquipment> ComputerEquipment { get; set; }
         public virtual DbSet<EquipmentType> EquipmentType { get; set; }
-        public virtual DbSet<OrderContent> OrderContent { get; set; }
         public virtual DbSet<OrderInfo> OrderInfo { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<RepairType> RepairType { get; set; }

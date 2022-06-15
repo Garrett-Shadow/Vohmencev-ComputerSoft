@@ -9,13 +9,13 @@ namespace Vohmencev_ComputerSoft.Pages
     public static class Connector
     {
         private static Database.Staff StaffProfile;
-        private static Database.ComputerSoftEntities DatabaseConnector;
+        private static Database.Vohmencev_ComputerSoftEntities DatabaseConnector;
 
-        public static Database.ComputerSoftEntities GetModel()
+        public static Database.Vohmencev_ComputerSoftEntities GetModel()
         {
             if (DatabaseConnector == null)
             {
-                DatabaseConnector = new Database.ComputerSoftEntities();
+                DatabaseConnector = new Database.Vohmencev_ComputerSoftEntities();
             }
 
             return DatabaseConnector;

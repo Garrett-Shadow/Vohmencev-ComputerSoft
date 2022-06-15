@@ -20,12 +20,14 @@ namespace Vohmencev_ComputerSoft.Pages
     /// </summary>
     public partial class StaffPage : Page
     {
-        private Database.ComputerSoftEntities Connection;
+        private Database.Vohmencev_ComputerSoftEntities Connection;
         public Database.ComputerEquipment SelectedEquipment { get; set; }
         public Database.Client SelectedClient { get; set; }
-        private List<Database.ComputerEquipment> Equipments { get; set; }
-        private List<Database.Client> Clients { get; set; }
+        public Database.OrderInfo NewOrder { get; set; }
+        public List<Database.ComputerEquipment> Equipments { get; set; }
+        public List<Database.Client> Clients { get; set; }
         public List<Database.EquipmentType> Types { get; set; }
+        public List<Database.RepairType> Repairs { get; set; }
 
         public StaffPage()
         {
@@ -33,6 +35,8 @@ namespace Vohmencev_ComputerSoft.Pages
             Connection = Pages.Connector.GetModel();
             Types = Connection.EquipmentType.ToList();
             EquipmentTypeCombo.ItemsSource = Types;
+            Repairs = Connection.RepairType.ToList();
+            RepairTypeCombo.ItemsSource = Repairs;
             DataContext = this;
             EquipmentListUpdate();
             ClientListUpdate();
@@ -88,6 +92,7 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             Equipments = Connection.ComputerEquipment.OrderBy(emp => new { emp.EquipmentSerialNumber }).ToList();
             EquipmentList.ItemsSource = Equipments;
+            EquipmentCombo.ItemsSource = Equipments;
         }
 
         private void EquipmentListSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -137,7 +142,7 @@ namespace Vohmencev_ComputerSoft.Pages
             ClientfNameText.Text = "";
             ClientPhoneText.Text = "";
             SelectedClient = null;
-            MessageBox.Show("Новый экземпляр техники успешно добавлен!");
+            MessageBox.Show("Новый клиент успешно добавлен!");
         }
 
         private void ClientRefreshButton_Click(object sender, RoutedEventArgs e)
@@ -166,6 +171,7 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             Clients = Connection.Client.OrderBy(emp => new { emp.ClientName }).ToList();
             ClientList.ItemsSource = Clients;
+            ClientCombo.ItemsSource = Clients;
         }
 
         private void ClientListSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -193,6 +199,57 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             ClientfNameText.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
             ClientPhoneText.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+        }
+
+        //Элемент Заказ
+
+        private void OrderAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ClientCombo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Вы не выбрали клиента!");
+                return;
+            }
+            if (EquipmentCombo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Вы не выбрали технику для ремонта!");
+                return;
+            }
+            if (RepairTypeCombo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Вы не выбрали тип ремонта для техники!");
+                return;
+            }
+            int NewOrderNumber;
+            var LastOrder = Connection.OrderInfo.OrderBy(o => o.OrderNumber).ToList().LastOrDefault();
+            if (LastOrder == null)
+            {
+                NewOrderNumber = 1;
+            }
+            else
+            {
+                NewOrderNumber = LastOrder.OrderNumber + 1;
+            }
+            Database.OrderInfo NewOrderInfo = new Database.OrderInfo();
+            NewOrderInfo.OrderNumber = NewOrderNumber;
+            NewOrderInfo.Client = (ClientCombo.SelectedItem as Database.Client).Phone;
+            NewOrderInfo.Equipment= (EquipmentCombo.SelectedItem as Database.ComputerEquipment).EquipmentSerialNumber;
+            NewOrderInfo.Repair = (RepairTypeCombo.SelectedItem as Database.RepairType).RepairTypeName;
+            NewOrderInfo.OrderStatus = "В работе";
+            NewOrderInfo.OrderDate = DateTime.Today;
+            Connection.OrderInfo.Add(NewOrderInfo);
+            Connection.SaveChanges();
+            ClientCombo.SelectedIndex = -1;
+            EquipmentCombo.SelectedIndex = -1;
+            RepairTypeCombo.SelectedIndex = -1;
+            MessageBox.Show("Заказ успешно добавлен!");
+        }
+
+        private void OrderDropButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClientCombo.SelectedIndex = -1;
+            EquipmentCombo.SelectedIndex = -1;
+            RepairTypeCombo.SelectedIndex = -1;
         }
     }
 }

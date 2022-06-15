@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище ComputerSoftModelContainer" CdmEntityContainer="ComputerSoftEntities">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Vohmencev_ComputerSoftModelContainer" CdmEntityContainer="Vohmencev_ComputerSoftEntities">
     <EntitySetMapping Name="Client">
-      <EntityTypeMapping TypeName="ComputerSoftModel.Client">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.Client">
         <MappingFragment StoreEntitySet="Client">
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="ClientName" ColumnName="ClientName" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ComputerEquipment">
-      <EntityTypeMapping TypeName="ComputerSoftModel.ComputerEquipment">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.ComputerEquipment">
         <MappingFragment StoreEntitySet="ComputerEquipment">
           <ScalarProperty Name="EquipmentSerialNumber" ColumnName="EquipmentSerialNumber" />
           <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
@@ -19,47 +19,40 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EquipmentType">
-      <EntityTypeMapping TypeName="ComputerSoftModel.EquipmentType">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.EquipmentType">
         <MappingFragment StoreEntitySet="EquipmentType">
           <ScalarProperty Name="EquipmentTypeName" ColumnName="EquipmentTypeName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderContent">
-      <EntityTypeMapping TypeName="ComputerSoftModel.OrderContent">
-        <MappingFragment StoreEntitySet="OrderContent">
-          <ScalarProperty Name="OrderInfo" ColumnName="OrderInfo" />
-          <ScalarProperty Name="Equipment" ColumnName="Equipment" />
-          <ScalarProperty Name="Repair" ColumnName="Repair" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderInfo">
-      <EntityTypeMapping TypeName="ComputerSoftModel.OrderInfo">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.OrderInfo">
         <MappingFragment StoreEntitySet="OrderInfo">
           <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
           <ScalarProperty Name="Client" ColumnName="Client" />
+          <ScalarProperty Name="Equipment" ColumnName="Equipment" />
+          <ScalarProperty Name="Repair" ColumnName="Repair" />
           <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderStatus">
-      <EntityTypeMapping TypeName="ComputerSoftModel.OrderStatus">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.OrderStatus">
         <MappingFragment StoreEntitySet="OrderStatus">
           <ScalarProperty Name="StatusName" ColumnName="StatusName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RepairType">
-      <EntityTypeMapping TypeName="ComputerSoftModel.RepairType">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.RepairType">
         <MappingFragment StoreEntitySet="RepairType">
           <ScalarProperty Name="RepairTypeName" ColumnName="RepairTypeName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Staff">
-      <EntityTypeMapping TypeName="ComputerSoftModel.Staff">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
           <ScalarProperty Name="StaffLogin" ColumnName="StaffLogin" />
           <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
@@ -69,14 +62,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StaffRole">
-      <EntityTypeMapping TypeName="ComputerSoftModel.StaffRole">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.StaffRole">
         <MappingFragment StoreEntitySet="StaffRole">
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="ComputerSoftModel.sysdiagrams">
+      <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />

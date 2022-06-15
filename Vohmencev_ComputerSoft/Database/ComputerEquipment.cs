@@ -17,7 +17,7 @@ namespace Vohmencev_ComputerSoft.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ComputerEquipment()
         {
-            this.OrderContent = new HashSet<OrderContent>();
+            this.OrderInfo = new HashSet<OrderInfo>();
         }
     
         public string EquipmentSerialNumber { get; set; }
@@ -26,6 +26,6 @@ namespace Vohmencev_ComputerSoft.Database
     
         public virtual EquipmentType EquipmentType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderContent> OrderContent { get; set; }
+        public virtual ICollection<OrderInfo> OrderInfo { get; set; }
     }
 }

@@ -14,20 +14,16 @@ namespace Vohmencev_ComputerSoft.Database
     
     public partial class OrderInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OrderInfo()
-        {
-            this.OrderContent = new HashSet<OrderContent>();
-        }
-    
         public int OrderNumber { get; set; }
         public string Client { get; set; }
+        public string Equipment { get; set; }
+        public string Repair { get; set; }
         public string OrderStatus { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
     
         public virtual Client Client1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderContent> OrderContent { get; set; }
+        public virtual ComputerEquipment ComputerEquipment { get; set; }
         public virtual OrderStatus OrderStatus1 { get; set; }
+        public virtual RepairType RepairType { get; set; }
     }
 }

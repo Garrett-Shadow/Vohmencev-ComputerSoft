@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Хранилище ComputerSoftModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Хранилище Vohmencev_ComputerSoftModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Client">
     <Key>
       <PropertyRef Name="Phone" />
@@ -21,21 +21,14 @@
     </Key>
     <Property Name="EquipmentTypeName" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
-  <EntityType Name="OrderContent">
-    <Key>
-      <PropertyRef Name="OrderInfo" />
-      <PropertyRef Name="Equipment" />
-    </Key>
-    <Property Name="OrderInfo" Type="int" Nullable="false" />
-    <Property Name="Equipment" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Repair" Type="varchar" MaxLength="255" />
-  </EntityType>
   <EntityType Name="OrderInfo">
     <Key>
       <PropertyRef Name="OrderNumber" />
     </Key>
     <Property Name="OrderNumber" Type="int" Nullable="false" />
     <Property Name="Client" Type="varchar" MaxLength="15" />
+    <Property Name="Equipment" Type="varchar" MaxLength="50" />
+    <Property Name="Repair" Type="varchar" MaxLength="255" />
     <Property Name="OrderStatus" Type="varchar" MaxLength="255" />
     <Property Name="OrderDate" Type="date" />
   </EntityType>
@@ -76,7 +69,7 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
-  <Association Name="FK__ComputerE__Equip__5165187F">
+  <Association Name="FK__ComputerE__Equip__3F466844">
     <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
     <End Role="ComputerEquipment" Type="Self.ComputerEquipment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -88,43 +81,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderCont__Equip__59063A47">
-    <End Role="ComputerEquipment" Type="Self.ComputerEquipment" Multiplicity="1" />
-    <End Role="OrderContent" Type="Self.OrderContent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ComputerEquipment">
-        <PropertyRef Name="EquipmentSerialNumber" />
-      </Principal>
-      <Dependent Role="OrderContent">
-        <PropertyRef Name="Equipment" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderCont__Order__5812160E">
-    <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="1" />
-    <End Role="OrderContent" Type="Self.OrderContent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderInfo">
-        <PropertyRef Name="OrderNumber" />
-      </Principal>
-      <Dependent Role="OrderContent">
-        <PropertyRef Name="OrderInfo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderCont__Repai__59FA5E80">
-    <End Role="RepairType" Type="Self.RepairType" Multiplicity="0..1" />
-    <End Role="OrderContent" Type="Self.OrderContent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RepairType">
-        <PropertyRef Name="RepairTypeName" />
-      </Principal>
-      <Dependent Role="OrderContent">
-        <PropertyRef Name="Repair" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderInfo__Clien__5441852A">
+  <Association Name="FK__OrderInfo__Clien__4222D4EF">
     <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
     <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -136,7 +93,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderInfo__Order__5535A963">
+  <Association Name="FK__OrderInfo__Equip__4316F928">
+    <End Role="ComputerEquipment" Type="Self.ComputerEquipment" Multiplicity="0..1" />
+    <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ComputerEquipment">
+        <PropertyRef Name="EquipmentSerialNumber" />
+      </Principal>
+      <Dependent Role="OrderInfo">
+        <PropertyRef Name="Equipment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderInfo__Order__44FF419A">
     <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
     <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -148,7 +117,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Staff__StaffPosi__5EBF139D">
+  <Association Name="FK__OrderInfo__Repai__440B1D61">
+    <End Role="RepairType" Type="Self.RepairType" Multiplicity="0..1" />
+    <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RepairType">
+        <PropertyRef Name="RepairTypeName" />
+      </Principal>
+      <Dependent Role="OrderInfo">
+        <PropertyRef Name="Repair" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__StaffPosi__49C3F6B7">
     <End Role="StaffRole" Type="Self.StaffRole" Multiplicity="0..1" />
     <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
     <ReferentialConstraint>
@@ -160,42 +141,37 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Хранилище ComputerSoftModelContainer">
+  <EntityContainer Name="Хранилище Vohmencev_ComputerSoftModelContainer">
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComputerEquipment" EntityType="Self.ComputerEquipment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="OrderContent" EntityType="Self.OrderContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderInfo" EntityType="Self.OrderInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RepairType" EntityType="Self.RepairType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffRole" EntityType="Self.StaffRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__ComputerE__Equip__5165187F" Association="Self.FK__ComputerE__Equip__5165187F">
+    <AssociationSet Name="FK__ComputerE__Equip__3F466844" Association="Self.FK__ComputerE__Equip__3F466844">
       <End Role="EquipmentType" EntitySet="EquipmentType" />
       <End Role="ComputerEquipment" EntitySet="ComputerEquipment" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderCont__Equip__59063A47" Association="Self.FK__OrderCont__Equip__59063A47">
-      <End Role="ComputerEquipment" EntitySet="ComputerEquipment" />
-      <End Role="OrderContent" EntitySet="OrderContent" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderCont__Order__5812160E" Association="Self.FK__OrderCont__Order__5812160E">
-      <End Role="OrderInfo" EntitySet="OrderInfo" />
-      <End Role="OrderContent" EntitySet="OrderContent" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderCont__Repai__59FA5E80" Association="Self.FK__OrderCont__Repai__59FA5E80">
-      <End Role="RepairType" EntitySet="RepairType" />
-      <End Role="OrderContent" EntitySet="OrderContent" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderInfo__Clien__5441852A" Association="Self.FK__OrderInfo__Clien__5441852A">
+    <AssociationSet Name="FK__OrderInfo__Clien__4222D4EF" Association="Self.FK__OrderInfo__Clien__4222D4EF">
       <End Role="Client" EntitySet="Client" />
       <End Role="OrderInfo" EntitySet="OrderInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderInfo__Order__5535A963" Association="Self.FK__OrderInfo__Order__5535A963">
+    <AssociationSet Name="FK__OrderInfo__Equip__4316F928" Association="Self.FK__OrderInfo__Equip__4316F928">
+      <End Role="ComputerEquipment" EntitySet="ComputerEquipment" />
+      <End Role="OrderInfo" EntitySet="OrderInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderInfo__Order__44FF419A" Association="Self.FK__OrderInfo__Order__44FF419A">
       <End Role="OrderStatus" EntitySet="OrderStatus" />
       <End Role="OrderInfo" EntitySet="OrderInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Staff__StaffPosi__5EBF139D" Association="Self.FK__Staff__StaffPosi__5EBF139D">
+    <AssociationSet Name="FK__OrderInfo__Repai__440B1D61" Association="Self.FK__OrderInfo__Repai__440B1D61">
+      <End Role="RepairType" EntitySet="RepairType" />
+      <End Role="OrderInfo" EntitySet="OrderInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__StaffPosi__49C3F6B7" Association="Self.FK__Staff__StaffPosi__49C3F6B7">
       <End Role="StaffRole" EntitySet="StaffRole" />
       <End Role="Staff" EntitySet="Staff" />
     </AssociationSet>

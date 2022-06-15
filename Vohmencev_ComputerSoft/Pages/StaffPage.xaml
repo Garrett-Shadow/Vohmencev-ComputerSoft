@@ -10,69 +10,9 @@
 
     <Grid Background="LightSteelBlue">
         <TabControl TabStripPlacement="Top">
-            <TabItem Header="Заказ" FontFamily="Segoe UI Black" Width="100" Height="40">
-                <Grid Background="WhiteSmoke">
-                    <ListBox x:Name="OrdersList" ItemsSource="{Binding ComputerEquipment}" SelectionChanged="EquipmentListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding EquipmentSerialNumber}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <Label x:Name="OrderNumberLabel" Content="Номер заказа" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,25,25,0" VerticalAlignment="Top" Width="345"/>
-                    <TextBox x:Name="OrderNumberText" Text="{Binding SelectedEquipment.EquipmentSerialNumber}" FontFamily="Segoe UI" FontSize="20" HorizontalAlignment="Right" Margin="0,75,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
-                    <Label x:Name="OrderNameLabel" Content="Клиент" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,125,25,0" VerticalAlignment="Top" Width="345"/>
-                    <ComboBox Name="ClientCombo" ItemsSource="{Binding EquipmentType}" SelectedItem="{Binding SelectedEquipment.EquipmentType1}" FontSize="20" HorizontalAlignment="Right" Margin="0,175,25,0" VerticalAlignment="Top" Width="345">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding EquipmentTypeName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Button x:Name="OrderAddButton" Content="Добавить" Background="White" HorizontalAlignment="Left" Margin="25,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentAddButton_Click"/>
-                    <Button x:Name="OrderRefreshButton" Content="Обновить" Background="White" HorizontalAlignment="Left" Margin="224,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentRefreshButton_Click"/>
-                    <Button x:Name="OrderDropButton" Content="Сбросить" Background="White" HorizontalAlignment="Left" Margin="425,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentDropButton_Click"/>
-
-                </Grid>
-            </TabItem>
-            <TabItem Header="Техника" FontFamily="Segoe UI Black" Width="100" Height="40">
-                <Grid Background="WhiteSmoke">
-                    <ListBox x:Name="EquipmentList" ItemsSource="{Binding ComputerEquipment}" SelectionChanged="EquipmentListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding EquipmentSerialNumber}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <Label x:Name="EquipmentNumberLabel" Content="Серийный номер" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,25,25,0" VerticalAlignment="Top" Width="345"/>
-                    <TextBox x:Name="EquipmentNumberText" Text="{Binding SelectedEquipment.EquipmentSerialNumber}" FontFamily="Segoe UI" FontSize="20" HorizontalAlignment="Right" Margin="0,75,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
-                    <Label x:Name="EquipmentNameLabel" Content="Название техники" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,125,25,0" VerticalAlignment="Top" Width="345"/>
-                    <TextBox x:Name="EquipmentNameText" Text="{Binding SelectedEquipment.EquipmentName}" FontFamily="Segoe UI" FontSize="20" HorizontalAlignment="Right" Margin="0,175,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
-                    <Label x:Name="EquipmentTypeLabel" Content="Тип техники" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,225,25,0" VerticalAlignment="Top" Width="345"/>
-                    <ComboBox Name="EquipmentTypeCombo" ItemsSource="{Binding EquipmentType}" SelectedItem="{Binding SelectedEquipment.EquipmentType1}" FontSize="20" HorizontalAlignment="Right" Margin="0,275,25,0" VerticalAlignment="Top" Width="345">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <Run Text="{Binding EquipmentTypeName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <Button x:Name="EquipmentAddButton" Content="Добавить" Background="White" HorizontalAlignment="Left" Margin="25,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentAddButton_Click"/>
-                    <Button x:Name="EquipmentRefreshButton" Content="Обновить" Background="White" HorizontalAlignment="Left" Margin="224,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentRefreshButton_Click"/>
-                    <Button x:Name="EquipmentDropButton" Content="Сбросить" Background="White" HorizontalAlignment="Left" Margin="425,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentDropButton_Click"/>
-
-                </Grid>
-            </TabItem>
             <TabItem Header="Клиент" FontFamily="Segoe UI Black" Width="100" Height="40">
                 <Grid Background="WhiteSmoke">
-                    <ListBox x:Name="ClientList" ItemsSource="{Binding Client}" SelectionChanged="EquipmentListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
+                    <ListBox x:Name="ClientList" ItemsSource="{Binding Clients}" SelectionChanged="EquipmentListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -88,6 +28,79 @@
                     <Button x:Name="ClientAddButton" Content="Добавить" Background="White" HorizontalAlignment="Left" Margin="25,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="ClientAddButton_Click"/>
                     <Button x:Name="ClientRefreshButton" Content="Обновить" Background="White" HorizontalAlignment="Left" Margin="224,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="ClientRefreshButton_Click"/>
                     <Button x:Name="ClientDropButton" Content="Сбросить" Background="White" HorizontalAlignment="Left" Margin="425,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="ClientDropButton_Click"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Техника" FontFamily="Segoe UI Black" Width="100" Height="40">
+                <Grid Background="WhiteSmoke">
+                    <ListBox x:Name="EquipmentList" ItemsSource="{Binding Equipments}" SelectionChanged="EquipmentListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding EquipmentSerialNumber}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Label x:Name="EquipmentNumberLabel" Content="Серийный номер" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,25,25,0" VerticalAlignment="Top" Width="345"/>
+                    <TextBox x:Name="EquipmentNumberText" Text="{Binding SelectedEquipment.EquipmentSerialNumber}" FontFamily="Segoe UI" FontSize="20" HorizontalAlignment="Right" Margin="0,75,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
+                    <Label x:Name="EquipmentNameLabel" Content="Название техники" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,125,25,0" VerticalAlignment="Top" Width="345"/>
+                    <TextBox x:Name="EquipmentNameText" Text="{Binding SelectedEquipment.EquipmentName}" FontFamily="Segoe UI" FontSize="20" HorizontalAlignment="Right" Margin="0,175,25,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="345"/>
+                    <Label x:Name="EquipmentTypeLabel" Content="Тип техники" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Right" Margin="0,225,25,0" VerticalAlignment="Top" Width="345"/>
+                    <ComboBox Name="EquipmentTypeCombo" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedEquipment.EquipmentType1}" FontSize="20" HorizontalAlignment="Right" Margin="0,275,25,0" VerticalAlignment="Top" Width="345">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding EquipmentTypeName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button x:Name="EquipmentAddButton" Content="Добавить" Background="White" HorizontalAlignment="Left" Margin="25,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentAddButton_Click"/>
+                    <Button x:Name="EquipmentRefreshButton" Content="Обновить" Background="White" HorizontalAlignment="Left" Margin="224,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentRefreshButton_Click"/>
+                    <Button x:Name="EquipmentDropButton" Content="Сбросить" Background="White" HorizontalAlignment="Left" Margin="425,375,0,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="EquipmentDropButton_Click"/>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Заказ" FontFamily="Segoe UI Black" Width="100" Height="40">
+                <Grid Background="WhiteSmoke">
+                    <Label x:Name="OrderClientLabel" Content="Клиент" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Width="351"/>
+                    <ComboBox Name="ClientCombo" ItemsSource="{Binding Clients}" SelectedItem="{Binding NewOrder.Client1}" FontSize="20" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" Width="351">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding ClientName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label x:Name="OrderEquipmentLabel" Content="Техника" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Left" Margin="50,125,0,0" VerticalAlignment="Top" Width="351"/>
+                    <ComboBox Name="EquipmentCombo" ItemsSource="{Binding Equipments}" SelectedItem="{Binding NewOrder.ComputerEquipment}" FontSize="20" HorizontalAlignment="Left" Margin="50,175,0,0" VerticalAlignment="Top" Width="351">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding EquipmentSerialNumber}"/>
+                                    <Run Text=" / "/>
+                                    <Run Text="{Binding EquipmentName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label x:Name="OrderRepairLabel" Content="Ремонт" FontFamily="Segoe UI Black" FontSize="20" HorizontalAlignment="Left" Margin="50,225,0,0" VerticalAlignment="Top" Width="351"/>
+                    <ComboBox Name="RepairTypeCombo" ItemsSource="{Binding Repairs}" SelectedItem="{Binding NewOrder.RepairType}" FontSize="20" HorizontalAlignment="Left" Margin="50,275,0,0" VerticalAlignment="Top" Width="351">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding RepairTypeName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button x:Name="OrderAddButton" Content="Добавить" Background="White" HorizontalAlignment="Left" Margin="50,0,0,50" VerticalAlignment="Bottom" Width="151" Height="50" FontSize="20" Click="OrderAddButton_Click"/>
+                    <Button x:Name="OrderDropButton" Content="Сбросить" Background="White" HorizontalAlignment="Left" Margin="250,0,0,50" VerticalAlignment="Bottom" Width="151" Height="50" FontSize="20" Click="OrderDropButton_Click"/>
+
 
                 </Grid>
             </TabItem>

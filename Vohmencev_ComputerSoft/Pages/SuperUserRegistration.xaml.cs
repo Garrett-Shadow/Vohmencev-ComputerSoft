@@ -20,7 +20,7 @@ namespace Vohmencev_ComputerSoft.Pages
     /// </summary>
     public partial class SuperUserRegistration : Page
     {
-        private readonly Database.ComputerSoftEntities Connection;
+        private readonly Database.Vohmencev_ComputerSoftEntities Connection;
 
         public SuperUserRegistration()
         {

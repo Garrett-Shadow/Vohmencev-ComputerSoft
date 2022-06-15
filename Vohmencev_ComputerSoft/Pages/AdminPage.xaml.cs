@@ -20,7 +20,7 @@ namespace Vohmencev_ComputerSoft.Pages
     /// </summary>
     public partial class AdminPage : Page
     {
-        private Database.ComputerSoftEntities Connection;
+        private Database.Vohmencev_ComputerSoftEntities Connection;
         public Database.Staff SelectedEmployee { get; set; }
         private List<Database.Staff> Employees { get; set; }
         public List<Database.StaffRole> Roles { get; set; }
