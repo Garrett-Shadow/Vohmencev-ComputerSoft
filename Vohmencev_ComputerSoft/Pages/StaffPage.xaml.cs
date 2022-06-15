@@ -24,6 +24,8 @@ namespace Vohmencev_ComputerSoft.Pages
         public Database.ComputerEquipment SelectedEquipment { get; set; }
         public Database.Client SelectedClient { get; set; }
         public Database.OrderInfo NewOrder { get; set; }
+        public Database.OrderInfo SelectedOrder { get; set; }
+        public List<Database.OrderInfo> Orders { get; set; }
         public List<Database.ComputerEquipment> Equipments { get; set; }
         public List<Database.Client> Clients { get; set; }
         public List<Database.EquipmentType> Types { get; set; }
@@ -40,9 +42,10 @@ namespace Vohmencev_ComputerSoft.Pages
             DataContext = this;
             EquipmentListUpdate();
             ClientListUpdate();
+            OrdersListUpdate();
         }
 
-        //Элемент Техника
+        //Управление техникой
 
         private void EquipmentAddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +93,7 @@ namespace Vohmencev_ComputerSoft.Pages
 
         private void EquipmentListUpdate()
         {
-            Equipments = Connection.ComputerEquipment.OrderBy(emp => new { emp.EquipmentSerialNumber }).ToList();
+            Equipments = Connection.ComputerEquipment.OrderBy(eqpt => new { eqpt.EquipmentSerialNumber }).ToList();
             EquipmentList.ItemsSource = Equipments;
             EquipmentCombo.ItemsSource = Equipments;
         }
@@ -124,7 +127,7 @@ namespace Vohmencev_ComputerSoft.Pages
             EquipmentTypeCombo.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
         }
 
-        //Элемент Клиент
+        //Управление клиентами
 
         private void ClientAddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -169,14 +172,14 @@ namespace Vohmencev_ComputerSoft.Pages
 
         private void ClientListUpdate()
         {
-            Clients = Connection.Client.OrderBy(emp => new { emp.ClientName }).ToList();
+            Clients = Connection.Client.OrderBy(clnt => new { clnt.ClientName }).ToList();
             ClientList.ItemsSource = Clients;
             ClientCombo.ItemsSource = Clients;
         }
 
         private void ClientListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (EquipmentList.SelectedIndex != -1)
+            if (ClientList.SelectedIndex != -1)
             {
                 ClientAddButton.IsEnabled = false;
                 ClientRefreshButton.IsEnabled = true;
@@ -201,7 +204,7 @@ namespace Vohmencev_ComputerSoft.Pages
             ClientPhoneText.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
         }
 
-        //Элемент Заказ
+        //Добавление заказа
 
         private void OrderAddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -221,7 +224,7 @@ namespace Vohmencev_ComputerSoft.Pages
                 return;
             }
             int NewOrderNumber;
-            var LastOrder = Connection.OrderInfo.OrderBy(o => o.OrderNumber).ToList().LastOrDefault();
+            var LastOrder = Connection.OrderInfo.OrderBy(ord => ord.OrderNumber).ToList().LastOrDefault();
             if (LastOrder == null)
             {
                 NewOrderNumber = 1;
@@ -242,6 +245,7 @@ namespace Vohmencev_ComputerSoft.Pages
             ClientCombo.SelectedIndex = -1;
             EquipmentCombo.SelectedIndex = -1;
             RepairTypeCombo.SelectedIndex = -1;
+            OrdersListUpdate();
             MessageBox.Show("Заказ успешно добавлен!");
         }
 
@@ -250,6 +254,65 @@ namespace Vohmencev_ComputerSoft.Pages
             ClientCombo.SelectedIndex = -1;
             EquipmentCombo.SelectedIndex = -1;
             RepairTypeCombo.SelectedIndex = -1;
+        }
+
+        //Управление заказами
+
+        private void OrdersManagementReadyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedOrder != null)
+            {
+                SelectedOrder.OrderStatus = "Готов";
+                Connection.SaveChanges();
+                MessageBox.Show("Заказ выполнен!");
+                SelectedOrder = null;
+                OrdersListUpdate();
+            }
+            else
+            {
+                MessageBox.Show("Вы не выбрали заказ!");
+                return;
+            }
+        }
+
+        private void OrdersManagementCancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedOrder != null)
+            {
+                SelectedOrder.OrderStatus = "Отменен";
+                Connection.SaveChanges();
+                MessageBox.Show("Заказ отменен!");
+                SelectedOrder = null;
+                OrdersListUpdate();
+            }
+            else
+            {
+                MessageBox.Show("Вы не выбрали заказ!");
+                return;
+            }
+        }
+
+        private void OrdersListUpdate()
+        {
+            Orders = Connection.OrderInfo.OrderBy(ord => new { ord.OrderNumber }).ToList();
+            OrdersList.ItemsSource = Orders;
+            OrdersList.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
+        }
+
+        private void OrdersListSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (OrdersList.SelectedIndex != -1)
+            {
+                OrdersManagementReadyButton.IsEnabled = true;
+                OrdersManagementCancelButton.IsEnabled = true;
+                SelectedOrder = OrdersList.SelectedItem as Database.OrderInfo;
+            }
+            else
+            {
+                OrdersManagementReadyButton.IsEnabled = false;
+                OrdersManagementCancelButton.IsEnabled = false;
+                SelectedOrder = null;
+            }
         }
     }
 }

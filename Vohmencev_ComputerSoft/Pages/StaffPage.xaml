@@ -39,6 +39,8 @@
                             <DataTemplate>
                                 <TextBlock>
                                     <Run Text="{Binding EquipmentSerialNumber}"/>
+                                    <Run Text=" / "/>
+                                    <Run Text="{Binding EquipmentName}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -101,6 +103,29 @@
                     <Button x:Name="OrderAddButton" Content="Добавить" Background="White" HorizontalAlignment="Left" Margin="50,0,0,50" VerticalAlignment="Bottom" Width="151" Height="50" FontSize="20" Click="OrderAddButton_Click"/>
                     <Button x:Name="OrderDropButton" Content="Сбросить" Background="White" HorizontalAlignment="Left" Margin="250,0,0,50" VerticalAlignment="Bottom" Width="151" Height="50" FontSize="20" Click="OrderDropButton_Click"/>
 
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Список заказов" FontFamily="Segoe UI Black" Width="120" Height="40">
+                <Grid Background="WhiteSmoke">
+                    <ListBox x:Name="OrdersList" ItemsSource="{Binding Orders}" SelectionChanged="OrdersListSelectionChanged" HorizontalAlignment="Left" Height="400" Margin="25,25,0,0" VerticalAlignment="Top" Width="550">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Client}"/>
+                                    <Run Text=" / "/>
+                                    <Run Text="{Binding Equipment}"/>
+                                    <Run Text=" / "/>
+                                    <Run Text="{Binding Repair}"/>
+                                    <Run Text=" / "/>
+                                    <Run Text="{Binding OrderStatus}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="OrdersManagementReadyButton" Content="Готово" Background="PaleGreen" HorizontalAlignment="Right" Margin="0,25,25,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="OrdersManagementReadyButton_Click"/>
+                    <Button x:Name="OrdersManagementCancelButton" Content="Отмена" Background="PaleVioletRed" HorizontalAlignment="Right" Margin="0,125,25,0" VerticalAlignment="Top" Width="151" Height="50" FontSize="20" Click="OrdersManagementCancelButton_Click"/>
 
                 </Grid>
             </TabItem>
