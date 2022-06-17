@@ -7,16 +7,18 @@
       <Schema Namespace="Хранилище Vohmencev_ComputerSoftModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
-            <PropertyRef Name="Phone" />
+            <PropertyRef Name="ClientCode" />
           </Key>
-          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ClientCode" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="ClientName" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ComputerEquipment">
           <Key>
-            <PropertyRef Name="EquipmentSerialNumber" />
+            <PropertyRef Name="EquipmentCode" />
           </Key>
-          <Property Name="EquipmentSerialNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EquipmentCode" Type="int" Nullable="false" />
+          <Property Name="EquipmentSerialNumber" Type="varchar" MaxLength="50" />
           <Property Name="EquipmentName" Type="varchar" MaxLength="255" />
           <Property Name="EquipmentType" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -31,8 +33,8 @@
             <PropertyRef Name="OrderNumber" />
           </Key>
           <Property Name="OrderNumber" Type="int" Nullable="false" />
-          <Property Name="Client" Type="varchar" MaxLength="15" />
-          <Property Name="Equipment" Type="varchar" MaxLength="50" />
+          <Property Name="Client" Type="int" />
+          <Property Name="Equipment" Type="int" />
           <Property Name="Repair" Type="varchar" MaxLength="255" />
           <Property Name="OrderStatus" Type="varchar" MaxLength="255" />
           <Property Name="OrderDate" Type="date" />
@@ -51,9 +53,10 @@
         </EntityType>
         <EntityType Name="Staff">
           <Key>
-            <PropertyRef Name="StaffLogin" />
+            <PropertyRef Name="StaffCode" />
           </Key>
-          <Property Name="StaffLogin" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="StaffCode" Type="int" Nullable="false" />
+          <Property Name="StaffLogin" Type="varchar" MaxLength="15" />
           <Property Name="StaffPassword" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StaffName" Type="varchar" MaxLength="255" />
           <Property Name="StaffPosition" Type="varchar" MaxLength="50" />
@@ -91,7 +94,7 @@
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
-              <PropertyRef Name="Phone" />
+              <PropertyRef Name="ClientCode" />
             </Principal>
             <Dependent Role="OrderInfo">
               <PropertyRef Name="Client" />
@@ -103,7 +106,7 @@
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ComputerEquipment">
-              <PropertyRef Name="EquipmentSerialNumber" />
+              <PropertyRef Name="EquipmentCode" />
             </Principal>
             <Dependent Role="OrderInfo">
               <PropertyRef Name="Equipment" />
@@ -188,17 +191,19 @@
       <Schema Namespace="Vohmencev_ComputerSoftModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Client">
           <Key>
-            <PropertyRef Name="Phone" />
+            <PropertyRef Name="ClientCode" />
           </Key>
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientCode" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="ClientName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OrderInfo" Relationship="Self.FK__OrderInfo__Clien__4222D4EF" FromRole="Client" ToRole="OrderInfo" />
         </EntityType>
         <EntityType Name="ComputerEquipment">
           <Key>
-            <PropertyRef Name="EquipmentSerialNumber" />
+            <PropertyRef Name="EquipmentCode" />
           </Key>
-          <Property Name="EquipmentSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EquipmentCode" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EquipmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="EquipmentType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EquipmentType1" Relationship="Self.FK__ComputerE__Equip__3F466844" FromRole="ComputerEquipment" ToRole="EquipmentType" />
@@ -216,8 +221,8 @@
             <PropertyRef Name="OrderNumber" />
           </Key>
           <Property Name="OrderNumber" Type="Int32" Nullable="false" />
-          <Property Name="Client" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Client" Type="Int32" />
+          <Property Name="Equipment" Type="Int32" />
           <Property Name="Repair" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="OrderStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="0" />
@@ -242,9 +247,10 @@
         </EntityType>
         <EntityType Name="Staff">
           <Key>
-            <PropertyRef Name="StaffLogin" />
+            <PropertyRef Name="StaffCode" />
           </Key>
-          <Property Name="StaffLogin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaffCode" Type="Int32" Nullable="false" />
+          <Property Name="StaffLogin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="StaffPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StaffName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="StaffPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -272,7 +278,7 @@
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
-              <PropertyRef Name="Phone" />
+              <PropertyRef Name="ClientCode" />
             </Principal>
             <Dependent Role="OrderInfo">
               <PropertyRef Name="Client" />
@@ -296,7 +302,7 @@
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ComputerEquipment">
-              <PropertyRef Name="EquipmentSerialNumber" />
+              <PropertyRef Name="EquipmentCode" />
             </Principal>
             <Dependent Role="OrderInfo">
               <PropertyRef Name="Equipment" />
@@ -383,6 +389,7 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
               </MappingFragment>
@@ -391,6 +398,7 @@
           <EntitySetMapping Name="ComputerEquipment">
             <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.ComputerEquipment">
               <MappingFragment StoreEntitySet="ComputerEquipment">
+                <ScalarProperty Name="EquipmentCode" ColumnName="EquipmentCode" />
                 <ScalarProperty Name="EquipmentSerialNumber" ColumnName="EquipmentSerialNumber" />
                 <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
                 <ScalarProperty Name="EquipmentType" ColumnName="EquipmentType" />
@@ -433,6 +441,7 @@
           <EntitySetMapping Name="Staff">
             <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
                 <ScalarProperty Name="StaffLogin" ColumnName="StaffLogin" />
                 <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
                 <ScalarProperty Name="StaffName" ColumnName="StaffName" />

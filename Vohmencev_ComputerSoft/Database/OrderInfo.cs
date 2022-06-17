@@ -15,8 +15,8 @@ namespace Vohmencev_ComputerSoft.Database
     public partial class OrderInfo
     {
         public int OrderNumber { get; set; }
-        public string Client { get; set; }
-        public string Equipment { get; set; }
+        public Nullable<int> Client { get; set; }
+        public Nullable<int> Equipment { get; set; }
         public string Repair { get; set; }
         public string OrderStatus { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }

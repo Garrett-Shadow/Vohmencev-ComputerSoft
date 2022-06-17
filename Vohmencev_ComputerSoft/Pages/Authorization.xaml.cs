@@ -29,16 +29,16 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             if (Pages.Connector.Authorize(LoginText.Text, PasswordText.Password) == true)
             {
-                var profile = Pages.Connector.GetMyProfile();
-                if (profile == null)
+                var Profile = Pages.Connector.GetMyProfile();
+                if (Profile == null)
                 {
                     MessageBox.Show("Ошибка авторизации");
                     return;
                 }
 
-                var userRole = profile.StaffPosition;
+                var UserRole = Profile.StaffPosition;
 
-                switch (userRole)
+                switch (UserRole)
                 {
                     case "Администратор":
                         NavigationService.Navigate(Pages.PageClass.GetAdministrator());
@@ -46,6 +46,9 @@ namespace Vohmencev_ComputerSoft.Pages
                     case "Сотрудник":
                         NavigationService.Navigate(Pages.PageClass.GetStaff());
                         break;
+                    case "Уволен":
+                        MessageBox.Show("Вы были уволены!");
+                        return;
                     default: return;
                 }
             }

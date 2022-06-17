@@ -2,16 +2,18 @@
 <Schema Namespace="Хранилище Vohmencev_ComputerSoftModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Client">
     <Key>
-      <PropertyRef Name="Phone" />
+      <PropertyRef Name="ClientCode" />
     </Key>
-    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ClientCode" Type="int" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
     <Property Name="ClientName" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="ComputerEquipment">
     <Key>
-      <PropertyRef Name="EquipmentSerialNumber" />
+      <PropertyRef Name="EquipmentCode" />
     </Key>
-    <Property Name="EquipmentSerialNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EquipmentCode" Type="int" Nullable="false" />
+    <Property Name="EquipmentSerialNumber" Type="varchar" MaxLength="50" />
     <Property Name="EquipmentName" Type="varchar" MaxLength="255" />
     <Property Name="EquipmentType" Type="varchar" MaxLength="255" />
   </EntityType>
@@ -26,8 +28,8 @@
       <PropertyRef Name="OrderNumber" />
     </Key>
     <Property Name="OrderNumber" Type="int" Nullable="false" />
-    <Property Name="Client" Type="varchar" MaxLength="15" />
-    <Property Name="Equipment" Type="varchar" MaxLength="50" />
+    <Property Name="Client" Type="int" />
+    <Property Name="Equipment" Type="int" />
     <Property Name="Repair" Type="varchar" MaxLength="255" />
     <Property Name="OrderStatus" Type="varchar" MaxLength="255" />
     <Property Name="OrderDate" Type="date" />
@@ -46,9 +48,10 @@
   </EntityType>
   <EntityType Name="Staff">
     <Key>
-      <PropertyRef Name="StaffLogin" />
+      <PropertyRef Name="StaffCode" />
     </Key>
-    <Property Name="StaffLogin" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="StaffCode" Type="int" Nullable="false" />
+    <Property Name="StaffLogin" Type="varchar" MaxLength="15" />
     <Property Name="StaffPassword" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="StaffName" Type="varchar" MaxLength="255" />
     <Property Name="StaffPosition" Type="varchar" MaxLength="50" />
@@ -86,7 +89,7 @@
     <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
-        <PropertyRef Name="Phone" />
+        <PropertyRef Name="ClientCode" />
       </Principal>
       <Dependent Role="OrderInfo">
         <PropertyRef Name="Client" />
@@ -98,7 +101,7 @@
     <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ComputerEquipment">
-        <PropertyRef Name="EquipmentSerialNumber" />
+        <PropertyRef Name="EquipmentCode" />
       </Principal>
       <Dependent Role="OrderInfo">
         <PropertyRef Name="Equipment" />

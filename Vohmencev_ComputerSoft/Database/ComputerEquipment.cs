@@ -20,6 +20,7 @@ namespace Vohmencev_ComputerSoft.Database
             this.OrderInfo = new HashSet<OrderInfo>();
         }
     
+        public int EquipmentCode { get; set; }
         public string EquipmentSerialNumber { get; set; }
         public string EquipmentName { get; set; }
         public string EquipmentType { get; set; }

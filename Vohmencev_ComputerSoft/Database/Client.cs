@@ -20,6 +20,7 @@ namespace Vohmencev_ComputerSoft.Database
             this.OrderInfo = new HashSet<OrderInfo>();
         }
     
+        public int ClientCode { get; set; }
         public string Phone { get; set; }
         public string ClientName { get; set; }
     

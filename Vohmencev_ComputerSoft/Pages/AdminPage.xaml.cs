@@ -33,6 +33,7 @@ namespace Vohmencev_ComputerSoft.Pages
             RoleCombo.ItemsSource = Roles;
             DataContext = this;
             StaffListUpdate();
+            AdminRefreshButton.IsEnabled = false;
         }
 
         private void AdminAddButton_Click(object sender, RoutedEventArgs e)
@@ -42,7 +43,18 @@ namespace Vohmencev_ComputerSoft.Pages
                 MessageBox.Show("Не все поля заполнены!");
                 return;
             }
+            int NewEmployeeNumber;
+            var LastEmployee = Connection.Staff.OrderBy(ord => ord.StaffCode).ToList().LastOrDefault();
+            if (LastEmployee == null)
+            {
+                NewEmployeeNumber = 1;
+            }
+            else
+            {
+                NewEmployeeNumber = LastEmployee.StaffCode + 1;
+            }
             var NewEmployee = new Database.Staff();
+            NewEmployee.StaffCode = NewEmployeeNumber;
             NewEmployee.StaffLogin = StaffLogin.Text.Trim();
             NewEmployee.StaffPassword = StaffPassword.Text.Trim();
             NewEmployee.StaffName = StaffNameText.Text.ToString();
@@ -50,11 +62,11 @@ namespace Vohmencev_ComputerSoft.Pages
             Connection.Staff.Add(NewEmployee);
             Connection.SaveChanges();
             StaffListUpdate();
+            SelectedEmployee = null;
             StaffNameText.Text = "";
             StaffLogin.Text = "";
             StaffPassword.Text = "";
             RoleCombo.SelectedIndex = -1;
-            SelectedEmployee = null;
             MessageBox.Show("Новый сотрудник успешно добавлен!");
         }
 
@@ -73,13 +85,13 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             AdminAddButton.IsEnabled = true;
             AdminRefreshButton.IsEnabled = false;
+            SelectedEmployee = null;
             StaffList.SelectedIndex = -1;
             StaffNameText.Text = "";
             StaffLogin.Text = "";
             StaffPassword.Text = "";
             RoleCombo.SelectedIndex = -1;
-            SelectedEmployee = null;
-            StaffBindingUpdate();
+            //StaffBindingUpdate();
         }
 
         private void StaffListUpdate()
@@ -101,12 +113,12 @@ namespace Vohmencev_ComputerSoft.Pages
             {
                 AdminAddButton.IsEnabled = true;
                 AdminRefreshButton.IsEnabled = false;
+                SelectedEmployee = null;
                 StaffList.SelectedIndex = -1;
                 StaffNameText.Text = "";
                 StaffLogin.Text = "";
                 StaffPassword.Text = "";
                 RoleCombo.SelectedIndex = -1;
-                SelectedEmployee = null;
                 StaffBindingUpdate();
             }
         }

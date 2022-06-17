@@ -2,17 +2,19 @@
 <Schema Namespace="Vohmencev_ComputerSoftModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Client">
     <Key>
-      <PropertyRef Name="Phone" />
+      <PropertyRef Name="ClientCode" />
     </Key>
-    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClientCode" Type="Int32" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="ClientName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OrderInfo" Relationship="Self.FK__OrderInfo__Clien__4222D4EF" FromRole="Client" ToRole="OrderInfo" />
   </EntityType>
   <EntityType Name="ComputerEquipment">
     <Key>
-      <PropertyRef Name="EquipmentSerialNumber" />
+      <PropertyRef Name="EquipmentCode" />
     </Key>
-    <Property Name="EquipmentSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EquipmentCode" Type="Int32" Nullable="false" />
+    <Property Name="EquipmentSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="EquipmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="EquipmentType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="EquipmentType1" Relationship="Self.FK__ComputerE__Equip__3F466844" FromRole="ComputerEquipment" ToRole="EquipmentType" />
@@ -30,8 +32,8 @@
       <PropertyRef Name="OrderNumber" />
     </Key>
     <Property Name="OrderNumber" Type="Int32" Nullable="false" />
-    <Property Name="Client" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="Equipment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Client" Type="Int32" />
+    <Property Name="Equipment" Type="Int32" />
     <Property Name="Repair" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="OrderStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="OrderDate" Type="DateTime" Precision="0" />
@@ -56,9 +58,10 @@
   </EntityType>
   <EntityType Name="Staff">
     <Key>
-      <PropertyRef Name="StaffLogin" />
+      <PropertyRef Name="StaffCode" />
     </Key>
-    <Property Name="StaffLogin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StaffCode" Type="Int32" Nullable="false" />
+    <Property Name="StaffLogin" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="StaffPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="StaffName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="StaffPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -86,7 +89,7 @@
     <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Client">
-        <PropertyRef Name="Phone" />
+        <PropertyRef Name="ClientCode" />
       </Principal>
       <Dependent Role="OrderInfo">
         <PropertyRef Name="Client" />
@@ -110,7 +113,7 @@
     <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ComputerEquipment">
-        <PropertyRef Name="EquipmentSerialNumber" />
+        <PropertyRef Name="EquipmentCode" />
       </Principal>
       <Dependent Role="OrderInfo">
         <PropertyRef Name="Equipment" />

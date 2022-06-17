@@ -28,9 +28,9 @@ namespace Vohmencev_ComputerSoft.Pages
 
         public static bool Authorize(string login, string password)
         {
-            string getlogin = login.Trim();
-            string getpassword = password.Trim();
-            StaffProfile = GetModel().Staff.Where(Employee => Employee.StaffLogin == getlogin && Employee.StaffPassword == getpassword).FirstOrDefault();
+            string GetLogin = login.Trim();
+            string GetPassword = password.Trim();
+            StaffProfile = GetModel().Staff.Where(Employee => Employee.StaffLogin == GetLogin && Employee.StaffPassword == GetPassword).FirstOrDefault();
             return StaffProfile != null;
         }
     }

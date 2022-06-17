@@ -12,7 +12,7 @@
         <TabControl TabStripPlacement="Top">
             <TabItem Header="Клиент" FontFamily="Segoe UI Black" Width="100" Height="40">
                 <Grid Background="WhiteSmoke">
-                    <ListBox x:Name="ClientList" ItemsSource="{Binding Clients}" SelectionChanged="EquipmentListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
+                    <ListBox x:Name="ClientList" ItemsSource="{Binding Clients}" SelectionChanged="ClientListSelectionChanged" HorizontalAlignment="Left" Height="325" Margin="25,25,0,0" VerticalAlignment="Top" Width="350">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -113,9 +113,9 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                    <Run Text="{Binding Client}"/>
+                                    <Run Text="{Binding Client1.Phone}"/>
                                     <Run Text=" / "/>
-                                    <Run Text="{Binding Equipment}"/>
+                                    <Run Text="{Binding ComputerEquipment.EquipmentSerialNumber}"/>
                                     <Run Text=" / "/>
                                     <Run Text="{Binding Repair}"/>
                                     <Run Text=" / "/>

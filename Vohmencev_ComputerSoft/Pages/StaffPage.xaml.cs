@@ -54,17 +54,28 @@ namespace Vohmencev_ComputerSoft.Pages
                 MessageBox.Show("Не все поля заполнены!");
                 return;
             }
+            int NewEquipmentNumber;
+            var LastEquipment = Connection.ComputerEquipment.OrderBy(ord => ord.EquipmentCode).ToList().LastOrDefault();
+            if (LastEquipment == null)
+            {
+                NewEquipmentNumber = 1;
+            }
+            else
+            {
+                NewEquipmentNumber = LastEquipment.EquipmentCode + 1;
+            }
             var NewEquipment = new Database.ComputerEquipment();
+            NewEquipment.EquipmentCode = NewEquipmentNumber;
             NewEquipment.EquipmentSerialNumber = EquipmentNumberText.Text.ToString();
             NewEquipment.EquipmentName = EquipmentNameText.Text.ToString();
             NewEquipment.EquipmentType = (EquipmentTypeCombo.SelectedItem as Database.EquipmentType).EquipmentTypeName;
             Connection.ComputerEquipment.Add(NewEquipment);
             Connection.SaveChanges();
             EquipmentListUpdate();
+            SelectedEquipment = null;
             EquipmentNumberText.Text = "";
             EquipmentNameText.Text = "";
             EquipmentTypeCombo.SelectedIndex = -1;
-            SelectedEquipment = null;
             MessageBox.Show("Новый экземпляр техники успешно добавлен!");
         }
 
@@ -83,12 +94,12 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             EquipmentAddButton.IsEnabled = true;
             EquipmentRefreshButton.IsEnabled = false;
+            SelectedEquipment = null;
             EquipmentList.SelectedIndex = -1;
             EquipmentNumberText.Text = "";
             EquipmentNameText.Text = "";
             EquipmentTypeCombo.SelectedIndex = -1;
-            SelectedEquipment = null;
-            EquipmentBindingUpdate();
+            //EquipmentBindingUpdate();
         }
 
         private void EquipmentListUpdate()
@@ -111,11 +122,11 @@ namespace Vohmencev_ComputerSoft.Pages
             {
                 EquipmentAddButton.IsEnabled = true;
                 EquipmentRefreshButton.IsEnabled = false;
+                SelectedEquipment = null;
                 EquipmentList.SelectedIndex = -1;
                 EquipmentNumberText.Text = "";
                 EquipmentNameText.Text = "";
                 EquipmentTypeCombo.SelectedIndex = -1;
-                SelectedEquipment = null;
                 EquipmentBindingUpdate();
             }
         }
@@ -136,15 +147,26 @@ namespace Vohmencev_ComputerSoft.Pages
                 MessageBox.Show("Не все поля заполнены!");
                 return;
             }
+            int NewClientNumber;
+            var LastClient = Connection.Client.OrderBy(ord => ord.ClientCode).ToList().LastOrDefault();
+            if (LastClient == null)
+            {
+                NewClientNumber = 1;
+            }
+            else
+            {
+                NewClientNumber = LastClient.ClientCode + 1;
+            }
             var NewClient = new Database.Client();
+            NewClient.ClientCode = NewClientNumber;
             NewClient.ClientName = ClientfNameText.Text.ToString();
             NewClient.Phone = ClientPhoneText.Text.ToString();
             Connection.Client.Add(NewClient);
             Connection.SaveChanges();
             ClientListUpdate();
+            SelectedClient = null;
             ClientfNameText.Text = "";
             ClientPhoneText.Text = "";
-            SelectedClient = null;
             MessageBox.Show("Новый клиент успешно добавлен!");
         }
 
@@ -163,10 +185,10 @@ namespace Vohmencev_ComputerSoft.Pages
         {
             ClientAddButton.IsEnabled = true;
             ClientRefreshButton.IsEnabled = false;
+            SelectedClient = null;
             ClientList.SelectedIndex = -1;
             ClientfNameText.Text = "";
             ClientPhoneText.Text = "";
-            SelectedClient = null;
             ClientBindingUpdate();
         }
 
@@ -190,10 +212,10 @@ namespace Vohmencev_ComputerSoft.Pages
             {
                 ClientAddButton.IsEnabled = true;
                 ClientRefreshButton.IsEnabled = false;
+                SelectedClient = null;
                 ClientList.SelectedIndex = -1;
                 ClientfNameText.Text = "";
                 ClientPhoneText.Text = "";
-                SelectedClient = null;
                 ClientBindingUpdate();
             }
         }
@@ -235,8 +257,8 @@ namespace Vohmencev_ComputerSoft.Pages
             }
             Database.OrderInfo NewOrderInfo = new Database.OrderInfo();
             NewOrderInfo.OrderNumber = NewOrderNumber;
-            NewOrderInfo.Client = (ClientCombo.SelectedItem as Database.Client).Phone;
-            NewOrderInfo.Equipment= (EquipmentCombo.SelectedItem as Database.ComputerEquipment).EquipmentSerialNumber;
+            NewOrderInfo.Client = (ClientCombo.SelectedItem as Database.Client).ClientCode;
+            NewOrderInfo.Equipment= (EquipmentCombo.SelectedItem as Database.ComputerEquipment).EquipmentCode;
             NewOrderInfo.Repair = (RepairTypeCombo.SelectedItem as Database.RepairType).RepairTypeName;
             NewOrderInfo.OrderStatus = "В работе";
             NewOrderInfo.OrderDate = DateTime.Today;

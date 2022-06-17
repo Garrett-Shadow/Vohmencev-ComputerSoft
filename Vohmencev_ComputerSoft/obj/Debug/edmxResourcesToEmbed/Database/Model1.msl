@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Client">
       <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.Client">
         <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="ClientName" ColumnName="ClientName" />
         </MappingFragment>
@@ -12,6 +13,7 @@
     <EntitySetMapping Name="ComputerEquipment">
       <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.ComputerEquipment">
         <MappingFragment StoreEntitySet="ComputerEquipment">
+          <ScalarProperty Name="EquipmentCode" ColumnName="EquipmentCode" />
           <ScalarProperty Name="EquipmentSerialNumber" ColumnName="EquipmentSerialNumber" />
           <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
           <ScalarProperty Name="EquipmentType" ColumnName="EquipmentType" />
@@ -54,6 +56,7 @@
     <EntitySetMapping Name="Staff">
       <EntityTypeMapping TypeName="Vohmencev_ComputerSoftModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
           <ScalarProperty Name="StaffLogin" ColumnName="StaffLogin" />
           <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
           <ScalarProperty Name="StaffName" ColumnName="StaffName" />
